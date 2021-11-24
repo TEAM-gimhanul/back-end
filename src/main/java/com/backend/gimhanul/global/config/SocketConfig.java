@@ -1,5 +1,6 @@
 package com.backend.gimhanul.global.config;
 
+import com.backend.gimhanul.global.config.properties.SocketProperties;
 import com.backend.gimhanul.global.socket.WebSocketAddMappingSupporter;
 import com.backend.gimhanul.global.socket.exception.SocketExceptionListener;
 import com.backend.gimhanul.global.socket.security.WebSocketConnectController;
@@ -18,14 +19,12 @@ public class SocketConfig {
 	private final WebSocketAddMappingSupporter mappingSupporter;
 	private final WebSocketConnectController connectController;
 	private final SocketExceptionListener exceptionListener;
-
-	@Value("${socket.port}")
-	private Integer port;
+	private final SocketProperties socketProperties;
 
 	@Bean
 	public SocketIOServer socketIOServer() {
 		Configuration config = new Configuration();
-		config.setPort(port);
+		config.setPort(socketProperties.getPort());
 		config.setOrigin("*");
 		config.setExceptionListener(exceptionListener);
 		SocketIOServer server = new SocketIOServer(config);
