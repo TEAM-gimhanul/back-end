@@ -53,6 +53,7 @@ public class JwtTokenProvider {
 
     public User validate(String token) {
         // TODO 유저 정보 찾아오기
+        return null;
     }
 
     private String getSecretKey() {
