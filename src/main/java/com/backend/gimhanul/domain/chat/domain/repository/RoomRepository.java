@@ -1,6 +1,6 @@
-package com.backend.gimhanul.domain.room.domain.repository;
+package com.backend.gimhanul.domain.chat.domain.repository;
 
-import com.backend.gimhanul.domain.room.domain.Room;
+import com.backend.gimhanul.domain.chat.domain.Room;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
