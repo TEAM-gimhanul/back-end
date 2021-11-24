@@ -25,11 +25,13 @@ public class User {
     private String profileImage;
 
     @Column
-    private Long count;
+    private long count;
 
     @Builder
-    public User(String name, Long count) {
+    public User(String id, String name, Long count, String profileImage) {
+    	this.id = id;
         this.name = name;
         this.count = count;
+        this.profileImage = profileImage;
     }
 }
