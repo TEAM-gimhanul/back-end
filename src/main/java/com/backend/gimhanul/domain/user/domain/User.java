@@ -18,9 +18,6 @@ public class User {
   private String id;
 
   @Column()
-  private String pw;
-
-  @Column()
   private String name;
 
   @Column()
