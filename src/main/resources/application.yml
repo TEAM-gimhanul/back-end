@@ -34,3 +34,9 @@ user:
     client-id: ${NAVER_CLIENT}
     client-secret: ${NAVER_SECRET}
     redirect-url: ${NAVER_REDIRECT}
+
+jwt:
+  secret: ${JWT_SECRET}
+  exp: ${JWT_EXP}
+  header: ${JWT_HEADER}
+  prefix: ${JWT_PREFIX}
