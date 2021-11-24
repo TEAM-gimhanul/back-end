@@ -2,7 +2,6 @@ package com.backend.gimhanul.domain.message.domain;
 
 import com.backend.gimhanul.domain.member.domain.Member;
 import com.backend.gimhanul.domain.room.domain.Room;
-import com.backend.gimhanul.domain.user.domain.User;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
