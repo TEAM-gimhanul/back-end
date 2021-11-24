@@ -9,7 +9,7 @@ public class OtherServerBadRequestException extends HanulException {
 			new OtherServerBadRequestException();
 
 	private OtherServerBadRequestException() {
-		super(ErrorCode.)
+		super(ErrorCode.OTHER_SERVER_BAD_REQUEST);
 	}
 
 }
