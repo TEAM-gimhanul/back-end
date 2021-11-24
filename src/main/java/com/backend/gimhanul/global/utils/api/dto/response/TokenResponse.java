@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class NaverTokenResponse {
+public class TokenResponse {
 
 	@JsonProperty("access_token")
 	private String accessToken;
