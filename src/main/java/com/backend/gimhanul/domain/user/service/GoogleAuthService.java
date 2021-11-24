@@ -9,6 +9,7 @@ import com.backend.gimhanul.domain.user.exception.CredentialsNotFoundException;
 import com.backend.gimhanul.domain.user.presentation.dto.request.AuthRequest;
 import com.backend.gimhanul.domain.user.presentation.dto.response.TokenResponse;
 import com.backend.gimhanul.global.config.properties.UserProperties;
+import com.backend.gimhanul.global.security.jwt.JwtTokenProvider;
 import com.backend.gimhanul.global.utils.api.client.GoogleAuthClient;
 import com.backend.gimhanul.global.utils.api.client.GoogleInfoClient;
 import com.backend.gimhanul.global.utils.api.dto.request.GoogleCodeRequest;
@@ -25,6 +26,7 @@ public class GoogleAuthService {
 	private final GoogleAuthClient googleAuthClient;
 	private final GoogleInfoClient googleInfoClient;
 	private final UserRepository userRepository;
+	private final JwtTokenProvider jwtTokenProvider;
 
 	public TokenResponse execute(AuthRequest request) {
 		GoogleCodeRequest codeRequest = GoogleCodeRequest.builder()
@@ -49,12 +51,7 @@ public class GoogleAuthService {
 			);
 		}
 
-		User user = userRepository.findById(response.getEmail())
-				.orElseThrow(() -> CredentialsNotFoundException.EXCEPTION);
-
-		// TODO: 2021-11-25 토큰 발급 
-
-		return null;
+		return new TokenResponse(jwtTokenProvider.generateAccessToken(response.getEmail()));
 	}
 
 }
