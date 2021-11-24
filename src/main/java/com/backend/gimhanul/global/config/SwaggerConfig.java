@@ -51,7 +51,7 @@ public class SwaggerConfig {
   }
 
   private ApiInfo swaggerInfo() {
-    return new ApiInfoBuilder().title("고운말 서버 API문서")
+    return new ApiInfoBuilder().title("\"고운말 서버 API문서\"")
             .description("고운말 서버의 API문서 입니다")
             .license("고운말")
             .licenseUrl("https://github.com/TEAM-gimhanul/back-end")
