@@ -11,6 +11,7 @@ import lombok.Getter;
 public enum ErrorCode {
 
 	BAD_REQUEST(400, "HANUL-400-1", "Badreqeust"),
+	CREDENTIALS_NOT_FOUND(401, "USER-401-1", "Credentials not found."),
 
 	OTHER_SERVER_BAD_REQUEST(400, "FEIGN-400-1", "Other server bad reqeust"),
 	OTHER_SERVER_UNAUTHORIZED(401, "FEIGN-401-1", "Other server unauthorized"),
