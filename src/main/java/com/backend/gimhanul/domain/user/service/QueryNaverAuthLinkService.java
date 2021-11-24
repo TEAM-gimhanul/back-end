@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class QueryNaverAuthLinkService {
 
-	private static final String QUERY_STRING = "?response_type=code&client_id=%s&redirect_uri=%s";
+	private static final String QUERY_STRING = "/authorize?response_type=code&client_id=%s&redirect_uri=%s";
 
 	private final UserProperties userProperties;
 
