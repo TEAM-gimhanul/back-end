@@ -1,6 +1,5 @@
-package com.backend.gimhanul.domain.member.domain;
+package com.backend.gimhanul.domain.chat.domain;
 
-import com.backend.gimhanul.domain.room.domain.Room;
 import com.backend.gimhanul.domain.user.domain.User;
 import lombok.AccessLevel;
 import lombok.Builder;
