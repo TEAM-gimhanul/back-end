@@ -1,0 +1,16 @@
+server:
+  port: 8080
+
+spring:
+
+  jpa:
+    show-sql: true
+    database: mysql
+    hibernate:
+      ddl-auto: update
+
+  datasource:
+    url: jdbc:mysql://${DB_URL}:3306/${DB_NAME}?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
