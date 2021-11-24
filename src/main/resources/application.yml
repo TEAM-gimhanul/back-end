@@ -14,3 +14,28 @@ spring:
     username: ${DB_USER}
     password: ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
+
+socket:
+  port: ${SOCKER_PORT:8081}
+
+user:
+  kakao:
+    base-url: ${KAKAO_BASE_URL}
+    client-id: ${KAKAO_CLIENT}
+    client-secret: ${KAKAO_SECRET}
+    redirect-url: ${KAKAO_REDIRECT}
+  google:
+    base-url: ${GOOGLE_BASE_URL}
+    client-id: ${GOOGLE_CLIENT}
+    client-secret: ${GOOGLE_SECRET}
+    redirect-url: ${GOOGLE_REDIRECT}
+  naver:
+    base-url: ${NAVER_BASE_URL}
+    client-id: ${NAVER_CLIENT}
+    client-secret: ${NAVER_SECRET}
+    redirect-url: ${NAVER_REDIRECT}
+
+jwt:
+  secret: ${JWT_SECRET}
+  exp: ${JWT_EXP}
+  header: ${JWT_HEADER}
