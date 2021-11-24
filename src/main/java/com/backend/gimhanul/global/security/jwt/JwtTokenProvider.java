@@ -1,6 +1,7 @@
 package com.backend.gimhanul.global.security.jwt;
 
 import com.backend.gimhanul.domain.user.domain.User;
+import com.backend.gimhanul.domain.user.facade.UserFacade;
 import com.backend.gimhanul.global.config.properties.JwtProperties;
 import com.backend.gimhanul.global.exceptions.ServerErrorException;
 import com.backend.gimhanul.global.security.jwt.exception.TokenBadRequestException;
@@ -20,6 +21,7 @@ import java.util.Date;
 public class JwtTokenProvider {
 
     private final JwtProperties jwtProperties;
+    private final UserFacade userFacade;
 
     public String generateAccessToken(String email) {
         return Jwts.builder()
@@ -49,10 +51,8 @@ public class JwtTokenProvider {
         }
     }
 
-
     public User validate(String token) {
-        // TODO 유저 정보 찾아오기
-        return null;
+        return userFacade.findUserById(parseToken(token).getSubject());
     }
 
     private String getSecretKey() {
