@@ -11,6 +11,7 @@ import lombok.Getter;
 public enum ErrorCode {
 
 	BAD_REQUEST(400, "HANUL-400-1", "Badreqeust"),
+	CREDENTIALS_NOT_FOUND(401, "USER-401-1", "Credentials not found."),
 
 	TOKEN_BAD_REQUEST(400, "TOKEN-400-1", "Token is not served"),
 	TOKEN_FORGED_ERROR(403, "TOKEN-403-1", "Token is forged"),
