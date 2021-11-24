@@ -3,7 +3,6 @@ package com.backend.gimhanul.global.security.jwt;
 import com.backend.gimhanul.domain.user.domain.User;
 import com.backend.gimhanul.global.config.properties.JwtProperties;
 import com.backend.gimhanul.global.exceptions.ServerErrorException;
-import com.backend.gimhanul.global.security.jwt.exception.GoneRequestErrorException;
 import com.backend.gimhanul.global.security.jwt.exception.TokenBadRequestException;
 import com.backend.gimhanul.global.security.jwt.exception.TokenExpireException;
 import com.backend.gimhanul.global.security.jwt.exception.TokenForgedException;
