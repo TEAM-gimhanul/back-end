@@ -14,6 +14,7 @@ public class UserProperties {
 
 	private OAuth kakao;
 	private OAuth google;
+	private OAuth naver;
 
 	@Getter
 	@Setter
@@ -54,6 +55,22 @@ public class UserProperties {
 
 	public String getGoogleClientSecret() {
 		return google.getClientSecret();
+	}
+
+	public String getNaverBaseUrl() {
+		return naver.getBaseUrl();
+	}
+
+	public String getNaverClientId() {
+		return naver.getClientId();
+	}
+
+	public String getNaverRedirectUrl() {
+		return naver.getRedirectUrl();
+	}
+
+	public String getNaverClientSecret() {
+		return naver.getClientSecret();
 	}
 
 }
