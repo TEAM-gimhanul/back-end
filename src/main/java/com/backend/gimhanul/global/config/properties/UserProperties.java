@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Configuration;
 public class UserProperties {
 
 	private OAuth kakao;
+	private OAuth google;
 
 	@Getter
 	@Setter
@@ -23,7 +24,7 @@ public class UserProperties {
 		private String redirectUrl;
 	}
 
-	public String getkakaoBaseUrl() {
+	public String getKakaoBaseUrl() {
 		return kakao.getBaseUrl();
 	}
 
@@ -37,6 +38,22 @@ public class UserProperties {
 
 	public String getKakaoClientSecret() {
 		return kakao.getClientSecret();
+	}
+
+	public String getGoogleBaseUrl() {
+		return google.getBaseUrl();
+	}
+
+	public String getGoogleClientId() {
+		return google.getClientId();
+	}
+
+	public String getGoogleRedirectUrl() {
+		return google.getRedirectUrl();
+	}
+
+	public String getGoogleClientSecret() {
+		return google.getClientSecret();
 	}
 
 }
