@@ -14,8 +14,8 @@ import javax.persistence.*;
 public class Member {
 
     @Id
-    @Column
-    private Long idx;
+    @Column()
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_user_id")
