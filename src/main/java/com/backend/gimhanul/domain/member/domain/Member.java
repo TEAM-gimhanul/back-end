@@ -13,15 +13,15 @@ import javax.persistence.*;
 @Entity(name = "tbl_member")
 public class Member {
 
-  @Id
-  @Column
-  private Long idx;
+    @Id
+    @Column
+    private Long idx;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "fk_user_id")
-  private User user;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_user_id")
+    private User user;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "fk_room_idx")
-  private Room room;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_room_idx")
+    private Room room;
 }
