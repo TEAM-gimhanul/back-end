@@ -1,6 +1,7 @@
 package com.backend.gimhanul.domain.user.domain;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -13,13 +14,22 @@ import javax.persistence.Id;
 @Entity(name = "tbl_user")
 public class User {
 
-  @Id
-  @Column()
-  private String id;
+    @Id
+    @Column
+    private String id;
 
-  @Column()
-  private String name;
+    @Column
+    private String name;
 
-  @Column()
-  private Long count;
+    @Column(name = "profile_image")
+    private String profileImage;
+
+    @Column
+    private Long count;
+
+    @Builder
+    public User(String name, Long count) {
+        this.name = name;
+        this.count = count;
+    }
 }
