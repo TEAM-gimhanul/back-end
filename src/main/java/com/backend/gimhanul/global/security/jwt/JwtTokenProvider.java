@@ -12,8 +12,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Base64;
 import java.util.Date;
+import java.util.Enumeration;
 
 @Slf4j
 @Component
@@ -49,6 +51,19 @@ public class JwtTokenProvider {
         } catch (Exception e) {
             throw ServerErrorException.EXCEPTION;
         }
+    }
+
+    public String extract(HttpServletRequest request) {
+        Enumeration<String> headers = request.getHeaders(jwtProperties.getHeader());
+
+        while (headers.hasMoreElements()) {
+            String value = headers.nextElement();
+            if (value.toLowerCase().startsWith(jwtProperties.getPrefix().toLowerCase())) {
+                return value.substring(jwtProperties.getPrefix().length()).trim();
+            }
+        }
+
+        throw TokenBadRequestException.EXCEPTION;
     }
 
     public User validate(String token) {
