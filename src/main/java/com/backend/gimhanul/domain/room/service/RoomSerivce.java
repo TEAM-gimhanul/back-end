@@ -1,4 +1,4 @@
-package com.backend.gimhanul.domain.room.services;
+package com.backend.gimhanul.domain.room.service;
 
 import com.backend.gimhanul.domain.room.domain.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
