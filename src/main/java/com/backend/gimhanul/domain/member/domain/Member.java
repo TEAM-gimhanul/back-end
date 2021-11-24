@@ -28,7 +28,7 @@ public class Member {
     private Room room;
 
     @Builder
-    public Member (User user, Room room) {
+    public Member(User user, Room room) {
         this.user = user;
         this.room = room;
     }
