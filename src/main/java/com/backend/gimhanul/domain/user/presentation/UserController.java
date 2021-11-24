@@ -2,10 +2,12 @@ package com.backend.gimhanul.domain.user.presentation;
 
 import com.backend.gimhanul.domain.user.presentation.dto.request.AuthRequest;
 import com.backend.gimhanul.domain.user.presentation.dto.response.TokenResponse;
+import com.backend.gimhanul.domain.user.service.GoogleAuthService;
 import com.backend.gimhanul.domain.user.service.NaverAuthService;
 import com.backend.gimhanul.domain.user.service.QueryGoogleAuthLinkService;
 import com.backend.gimhanul.domain.user.service.QueryKakaoAuthLinkService;
 import com.backend.gimhanul.domain.user.service.QueryNaverAuthLinkService;
+import com.backend.gimhanul.global.utils.api.dto.response.GoogleInformationResponse;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +24,7 @@ public class UserController {
 	private final QueryKakaoAuthLinkService queryKakaoAuthLinkService;
 	private final QueryGoogleAuthLinkService queryGoogleAuthLinkService;
 	private final QueryNaverAuthLinkService queryNaverAuthLinkService;
+	private final GoogleAuthService googleAuthService;
 	private final NaverAuthService naverAuthService;
 
 	@GetMapping("/kakao")
@@ -37,6 +40,11 @@ public class UserController {
 	@GetMapping("/naver")
 	public String queryNaverAuthLink() {
 		return queryNaverAuthLinkService.execute();
+	}
+
+	@PostMapping("/google")
+	public TokenResponse googleAuth(@RequestBody AuthRequest request) {
+		return googleAuthService.execute(request);
 	}
 
 	@PostMapping("/naver")
