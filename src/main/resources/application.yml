@@ -17,3 +17,10 @@ spring:
 
 socket:
   port: ${SOCKER_PORT:8081}
+
+user:
+  kakao:
+    base-url: ${KAKAO_BASE_URL}
+    client-id: ${KAKAO_CLIENT}
+    client-secret: ${KAKAO_SECRET}
+    redirect-url: ${KAKAO_REDIRECT}
