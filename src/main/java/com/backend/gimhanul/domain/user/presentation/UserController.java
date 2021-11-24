@@ -3,6 +3,7 @@ package com.backend.gimhanul.domain.user.presentation;
 import com.backend.gimhanul.domain.user.presentation.dto.request.AuthRequest;
 import com.backend.gimhanul.domain.user.presentation.dto.response.TokenResponse;
 import com.backend.gimhanul.domain.user.service.GoogleAuthService;
+import com.backend.gimhanul.domain.user.service.KakaoAuthService;
 import com.backend.gimhanul.domain.user.service.NaverAuthService;
 import com.backend.gimhanul.domain.user.service.QueryGoogleAuthLinkService;
 import com.backend.gimhanul.domain.user.service.QueryKakaoAuthLinkService;
@@ -24,6 +25,7 @@ public class UserController {
 	private final QueryKakaoAuthLinkService queryKakaoAuthLinkService;
 	private final QueryGoogleAuthLinkService queryGoogleAuthLinkService;
 	private final QueryNaverAuthLinkService queryNaverAuthLinkService;
+	private final KakaoAuthService kakaoAuthService;
 	private final GoogleAuthService googleAuthService;
 	private final NaverAuthService naverAuthService;
 
@@ -40,6 +42,11 @@ public class UserController {
 	@GetMapping("/naver")
 	public String queryNaverAuthLink() {
 		return queryNaverAuthLinkService.execute();
+	}
+
+	@PostMapping("/kakao")
+	public TokenResponse kakaoAuth(@RequestBody AuthRequest request) {
+		return kakaoAuthService.execute(request);
 	}
 
 	@PostMapping("/google")

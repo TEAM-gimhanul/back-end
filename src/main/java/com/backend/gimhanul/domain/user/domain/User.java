@@ -28,7 +28,7 @@ public class User {
     private long count;
 
     @Builder
-    public User(String id, String name, Long count, String profileImage) {
+    public User(String id, String name, long count, String profileImage) {
     	this.id = id;
         this.name = name;
         this.count = count;
