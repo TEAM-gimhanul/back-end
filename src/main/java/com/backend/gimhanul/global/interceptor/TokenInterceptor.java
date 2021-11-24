@@ -1,6 +1,7 @@
 package com.backend.gimhanul.global.interceptor;
 
 import com.backend.gimhanul.global.annotation.UserLoginToken;
+import com.backend.gimhanul.global.security.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -13,10 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class AuthInterceptor implements HandlerInterceptor {
+public class TokenInterceptor implements HandlerInterceptor {
 
-    // Token 관련 DI
-
+    private final JwtTokenProvider jwtTokenProvider;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -32,12 +32,9 @@ public class AuthInterceptor implements HandlerInterceptor {
             return true;
         }
 
-        // Todo 토큰 가져오기
-
-        // Todo 토큰 검사 해주기
-
-
-        // Todo 유저 가져와서 request.setAttribute() 하기
+        request.setAttribute("user", jwtTokenProvider.validate(
+                jwtTokenProvider.extract(request)
+        ));
 
         return true;
     }

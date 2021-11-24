@@ -13,6 +13,8 @@ public enum ErrorCode {
 	BAD_REQUEST(400, "HANUL-400-1", "Badreqeust"),
 	CREDENTIALS_NOT_FOUND(401, "USER-401-1", "Credentials not found."),
 
+	USER_NOT_FOUND(404, "USER-404-1", "User not found."),
+
 	TOKEN_BAD_REQUEST(400, "TOKEN-400-1", "Token is not served"),
 	TOKEN_FORGED_ERROR(403, "TOKEN-403-1", "Token is forged"),
 	TOKEN_IS_EXPIRE(410, "TOKEN-410-1", "Token is expire"),
@@ -22,7 +24,7 @@ public enum ErrorCode {
 	OTHER_SERVER_FORBIDDEN(403, "FEIGN-403-1", "Other server forbidden"),
 	OTHER_SERVER_EXPIRED_TOKEN(419, "FEIGN-419-1", "Other server expired token"),
 
-	SERVER_ERROR(500, "HANUL-400-1", "Sever error occured");
+	SERVER_ERROR(500, "HANUL-500-1", "Sever error occured");
 
 
 

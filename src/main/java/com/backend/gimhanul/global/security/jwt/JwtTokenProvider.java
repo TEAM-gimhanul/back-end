@@ -1,6 +1,7 @@
 package com.backend.gimhanul.global.security.jwt;
 
 import com.backend.gimhanul.domain.user.domain.User;
+import com.backend.gimhanul.domain.user.facade.UserFacade;
 import com.backend.gimhanul.global.config.properties.JwtProperties;
 import com.backend.gimhanul.global.exceptions.ServerErrorException;
 import com.backend.gimhanul.global.security.jwt.exception.TokenBadRequestException;
@@ -11,8 +12,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Base64;
 import java.util.Date;
+import java.util.Enumeration;
 
 @Slf4j
 @Component
@@ -20,6 +23,7 @@ import java.util.Date;
 public class JwtTokenProvider {
 
     private final JwtProperties jwtProperties;
+    private final UserFacade userFacade;
 
     public String generateAccessToken(String email) {
         return Jwts.builder()
@@ -49,10 +53,21 @@ public class JwtTokenProvider {
         }
     }
 
+    public String extract(HttpServletRequest request) {
+        Enumeration<String> headers = request.getHeaders(jwtProperties.getHeader());
+
+        while (headers.hasMoreElements()) {
+            String value = headers.nextElement();
+            if (value.toLowerCase().startsWith(jwtProperties.getPrefix().toLowerCase())) {
+                return value.substring(jwtProperties.getPrefix().length()).trim();
+            }
+        }
+
+        throw TokenBadRequestException.EXCEPTION;
+    }
 
     public User validate(String token) {
-        // TODO 유저 정보 찾아오기
-        return null;
+        return userFacade.findUserById(parseToken(token).getSubject());
     }
 
     private String getSecretKey() {
