@@ -6,6 +6,7 @@ import com.backend.gimhanul.domain.user.exception.CredentialsNotFoundException;
 import com.backend.gimhanul.domain.user.presentation.dto.request.AuthRequest;
 import com.backend.gimhanul.domain.user.presentation.dto.response.TokenResponse;
 import com.backend.gimhanul.global.config.properties.UserProperties;
+import com.backend.gimhanul.global.security.jwt.JwtTokenProvider;
 import com.backend.gimhanul.global.utils.api.client.NaverAuthClient;
 import com.backend.gimhanul.global.utils.api.client.NaverInfoClient;
 import com.backend.gimhanul.global.utils.api.dto.response.NaverInformationResponse;
@@ -23,6 +24,7 @@ public class NaverAuthService {
 	private final UserRepository userRepository;
 	private final NaverAuthClient naverAuthClient;
 	private final NaverInfoClient naverInfoClient;
+	private final JwtTokenProvider jwtTokenProvider;
 
 	public TokenResponse execute(AuthRequest authRequest) {
 		String token = naverAuthClient.naverAuth(userProperties.getNaverClientId(), userProperties.getNaverClientSecret(),
@@ -41,12 +43,7 @@ public class NaverAuthService {
 			);
 		}
 
-		User user = userRepository.findById(response.getEmail())
-				.orElseThrow(() -> CredentialsNotFoundException.EXCEPTION);
-
-		// TODO: 2021-11-24 토큰 발급 
-
-		return null;
+		return new TokenResponse(jwtTokenProvider.generateAccessToken(response.getEmail()));
 	}
 
 }
