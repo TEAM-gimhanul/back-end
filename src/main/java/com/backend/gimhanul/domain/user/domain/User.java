@@ -1,6 +1,7 @@
 package com.backend.gimhanul.domain.user.domain;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -22,4 +23,10 @@ public class User {
 
   @Column()
   private Long count;
+
+  @Builder
+  public User (String name, Long count) {
+    this.name = name;
+    this.count = count;
+  }
 }

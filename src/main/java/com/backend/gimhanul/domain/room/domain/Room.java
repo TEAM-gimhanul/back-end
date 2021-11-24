@@ -1,6 +1,7 @@
 package com.backend.gimhanul.domain.room.domain;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -18,4 +19,9 @@ public class Room {
 
     @Column
     private String name;
+
+    @Builder
+    public Room(String name) {
+        this.name = name;
+    }
 }
