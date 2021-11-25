@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RoomRepository extends CrudRepository<Room, Long> {
-	@Query("select r.id from tbl_room r join tbl_member m on m.user.id = :email where r.id = m.room.id")
+	@Query("select r.id from tbl_room r join tbl_member m on m.user.id = :id where r.id = m.room.id")
 	List<String> findIdEmail(String id);
 }

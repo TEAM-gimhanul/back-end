@@ -2,6 +2,7 @@ package com.backend.gimhanul.domain.chat.presentation;
 
 import com.backend.gimhanul.domain.chat.exception.InvalidArgumentException;
 import com.backend.gimhanul.domain.chat.presentation.dto.request.SendChatRequest;
+import com.backend.gimhanul.domain.chat.service.JoinRoomService;
 import com.backend.gimhanul.domain.chat.service.SendChatService;
 import com.backend.gimhanul.domain.chat.service.SubscribeAllService;
 import com.backend.gimhanul.global.socket.annotation.SocketController;
@@ -16,6 +17,7 @@ public class ChatController {
 
 	private final SendChatService sendChatService;
 	private final SubscribeAllService subscribeAllService;
+	private final JoinRoomService joinRoomService;
 
 
 	@SocketMapping(endpoint = "message", requestCls = SendChatRequest.class)
@@ -36,6 +38,11 @@ public class ChatController {
 	@SocketMapping(endpoint = "subscribe-all")
 	public void subscribeAll(SocketIOClient client) {
 		subscribeAllService.execute(client);
+	}
+
+	@SocketMapping(endpoint = "join")
+	public void joinRoom(SocketIOClient client) {
+		joinRoomService.execute(client);
 	}
 
 }
