@@ -6,7 +6,7 @@ import com.backend.gimhanul.global.utils.api.dto.response.FilterResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 
-@FeignClient(name = "FilterClient", url = "http://filter:8085")
+@FeignClient(name = "FilterClient", url = "http://118.67.134.40:8085")
 public interface FilterClient {
 
 	@PostMapping("/text")
