@@ -15,6 +15,8 @@ public enum ErrorCode {
 
 	USER_NOT_FOUND(404, "USER-404-1", "User not found."),
 
+	EMOJI_NOT_FOUND(404, "EMOJI-404-1", "Emoji not found."),
+
 	TOKEN_BAD_REQUEST(400, "TOKEN-400-1", "Token is not served"),
 	TOKEN_FORGED_ERROR(403, "TOKEN-403-1", "Token is forged"),
 	TOKEN_IS_EXPIRE(410, "TOKEN-410-1", "Token is expire"),
