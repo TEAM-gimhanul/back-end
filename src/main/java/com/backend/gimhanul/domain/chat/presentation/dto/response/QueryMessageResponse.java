@@ -11,5 +11,6 @@ public class QueryMessageResponse {
 	private final Long messageId;
 	private final String message;
 	private final String name;
+	private final String profileImage;
 
 }

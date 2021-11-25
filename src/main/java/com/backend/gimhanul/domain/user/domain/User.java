@@ -34,4 +34,9 @@ public class User {
         this.count = count;
         this.profileImage = profileImage;
     }
+
+    public void appendCount(int count) {
+    	this.count += count;
+	}
+
 }

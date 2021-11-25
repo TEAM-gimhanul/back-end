@@ -23,7 +23,9 @@ public class QueryMessageService {
 		Room room = roomFacade.findRoomById(Long.valueOf(roomId));
 		return messageRepository.findByRoom(room)
 				.stream().map(message ->
-					new QueryMessageResponse(room.getId(), message.getId(), message.getMessage(), user.getName())
+					new QueryMessageResponse(room.getId(), message.getId(),
+							message.getMessage(), message.getMember().getUser().getName()
+							, message.getMember().getUser().getProfileImage())
 		).collect(Collectors.toList());
 	}
 
