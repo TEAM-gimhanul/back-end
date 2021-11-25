@@ -1,10 +1,10 @@
 package com.backend.gimhanul.domain.chat.facade;
 
-import com.backend.gimhanul.domain.user.domain.User;
 import com.backend.gimhanul.domain.chat.domain.Member;
 import com.backend.gimhanul.domain.chat.domain.Room;
 import com.backend.gimhanul.domain.chat.domain.repository.MemberRepository;
 import com.backend.gimhanul.domain.chat.exception.MemberNotFoundException;
+import com.backend.gimhanul.domain.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
