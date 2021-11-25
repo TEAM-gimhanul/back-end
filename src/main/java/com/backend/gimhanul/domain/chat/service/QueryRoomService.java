@@ -3,6 +3,8 @@ package com.backend.gimhanul.domain.chat.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.backend.gimhanul.domain.chat.domain.Message;
+import com.backend.gimhanul.domain.chat.domain.repository.MessageRepository;
 import com.backend.gimhanul.domain.chat.domain.repository.RoomRepository;
 import com.backend.gimhanul.domain.chat.presentation.dto.response.QueryRoomResponse;
 import com.backend.gimhanul.domain.user.domain.User;
@@ -15,12 +17,17 @@ import org.springframework.stereotype.Service;
 public class QueryRoomService {
 
 	private final RoomRepository roomRepository;
+	private final MessageRepository messageRepository;
 
 	public List<QueryRoomResponse> execute(User user) {
 		return roomRepository.findRoomById(user.getId())
-				.stream().map(room ->
-				new QueryRoomResponse(room.getId(), room.getUsername(user.getId()), room.getProfileImage(user.getId()))
-		).collect(Collectors.toList());
+				.stream().map(room -> {
+					Message message = messageRepository.findTopByRoom(room.getId())
+							.orElse(null);
+					return new QueryRoomResponse(room.getId(), room.getUsername(user.getId()),
+							room.getProfileImage(user.getId()), message != null ? message.getMessage() : null,
+							message != null ? message.getSentAt() : null);
+				}).collect(Collectors.toList());
 	}
 
 }
