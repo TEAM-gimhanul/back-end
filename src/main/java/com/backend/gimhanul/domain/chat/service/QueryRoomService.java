@@ -19,7 +19,7 @@ public class QueryRoomService {
 	public List<QueryRoomResponse> execute(User user) {
 		return roomRepository.findRoomById(user.getId())
 				.stream().map(room ->
-				new QueryRoomResponse(room.getId(), room.getUsername(user.getId()))
+				new QueryRoomResponse(room.getId(), room.getUsername(user.getId()), room.getProfileImage(user.getId()))
 		).collect(Collectors.toList());
 	}
 
