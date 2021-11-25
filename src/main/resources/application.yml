@@ -39,3 +39,4 @@ jwt:
   secret: ${JWT_SECRET}
   exp: ${JWT_EXP}
   header: ${JWT_HEADER}
+  prefix: ${JWT_PREFIX}
