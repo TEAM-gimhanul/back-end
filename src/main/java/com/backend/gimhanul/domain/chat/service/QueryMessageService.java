@@ -24,8 +24,8 @@ public class QueryMessageService {
 		return messageRepository.findByRoom(room)
 				.stream().map(message ->
 					new QueryMessageResponse(room.getId(), message.getId(),
-							message.getMessage(), room.getUsername(user.getId())
-							, room.getProfileImage(user.getId()))
+							message.getMessage(), message.getMember().getUser().getName()
+							, message.getMember().getUser().getProfileImage())
 		).collect(Collectors.toList());
 	}
 
