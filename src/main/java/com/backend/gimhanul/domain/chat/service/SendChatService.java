@@ -1,5 +1,6 @@
 package com.backend.gimhanul.domain.chat.service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -18,6 +19,7 @@ import com.backend.gimhanul.domain.user.domain.User;
 import com.backend.gimhanul.domain.chat.facade.RoomFacade;
 import com.backend.gimhanul.domain.user.facade.UserFacade;
 import com.backend.gimhanul.global.socket.SocketProperty;
+import com.backend.gimhanul.global.utils.CheckExist;
 import com.backend.gimhanul.global.utils.api.client.FilterClient;
 import com.backend.gimhanul.global.utils.api.dto.request.FilterRequest;
 import com.backend.gimhanul.global.utils.api.dto.response.FilterResponse;
@@ -52,7 +54,13 @@ public class SendChatService {
 		Member member = memberFacade.findMemberByUserAndRoom(user, room);
 
 		List<String> messageList = Arrays.asList(request.getMessage().split(" "));
-		List<Boolean> response = filterClient.filtering(new FilterRequest(messageList)).getData();
+		List<String> requestList = new ArrayList<>();
+
+		for (String message : messageList) {
+			requestList.add(CheckExist.checkIsOnlyEng(message) ? message : "ㅎ");
+		}
+
+		List<Boolean> response = filterClient.filtering(new FilterRequest(requestList)).getData();
 
 		int count = Collections.frequency(response, true);
 		user.appendCount(count);
