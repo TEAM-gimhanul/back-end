@@ -3,6 +3,7 @@ package com.backend.gimhanul.domain.chat.presentation;
 import com.backend.gimhanul.domain.chat.exception.InvalidArgumentException;
 import com.backend.gimhanul.domain.chat.presentation.dto.request.SendChatRequest;
 import com.backend.gimhanul.domain.chat.service.SendChatService;
+import com.backend.gimhanul.domain.chat.service.SubscribeAllService;
 import com.backend.gimhanul.global.socket.annotation.SocketController;
 import com.backend.gimhanul.global.socket.annotation.SocketMapping;
 import com.corundumstudio.socketio.SocketIOClient;
@@ -14,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 public class ChatController {
 
 	private final SendChatService sendChatService;
+	private final SubscribeAllService subscribeAllService;
 
 
 	@SocketMapping(endpoint = "message", requestCls = SendChatRequest.class)
@@ -29,6 +31,11 @@ public class ChatController {
 		} catch (Exception e) {
 			throw InvalidArgumentException.EXCEPTION;
 		}
+	}
+
+	@SocketMapping(endpoint = "subscribe-all")
+	public void subscribeAll(SocketIOClient client) {
+		subscribeAllService.execute(client);
 	}
 
 }
