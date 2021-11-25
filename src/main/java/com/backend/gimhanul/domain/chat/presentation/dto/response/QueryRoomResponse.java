@@ -9,5 +9,6 @@ public class QueryRoomResponse {
 
 	private final long roomId;
 	private final String name;
+	private final String profileImage;
 
 }

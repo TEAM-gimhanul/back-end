@@ -37,4 +37,9 @@ public class Room {
 				.collect(Collectors.toList()).get(0).getUser().getName();
 	}
 
+	public String getProfileImage(String id) {
+		return members.stream().filter(member -> !member.getUser().getId().equals(id))
+				.collect(Collectors.toList()).get(0).getUser().getProfileImage();
+	}
+
 }
