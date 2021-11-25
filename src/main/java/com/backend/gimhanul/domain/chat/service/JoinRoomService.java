@@ -35,6 +35,7 @@ public class JoinRoomService {
 		Optional<Long> roomId = memberRepository.findRoomIdByUsers(currentUser.getId(), randomUser.getId());
 
 		if(roomId.isPresent()) {
+			client.leaveRoom(roomId.get().toString());
 			client.joinRoom(roomId.get().toString());
 			client.sendEvent(SocketProperty.ROOM_KEY, new JoinResponse(randomUser.getName(), roomId.get()));
 			return;
