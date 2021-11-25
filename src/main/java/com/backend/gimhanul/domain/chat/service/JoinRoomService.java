@@ -37,7 +37,8 @@ public class JoinRoomService {
 		if(roomId.isPresent()) {
 			client.leaveRoom(roomId.get().toString());
 			client.joinRoom(roomId.get().toString());
-			client.sendEvent(SocketProperty.ROOM_KEY, new JoinResponse(randomUser.getName(), roomId.get(), randomUser.getProfileImage()));
+			client.sendEvent(SocketProperty.ROOM_KEY, new JoinResponse(randomUser.getName(), roomId.get(),
+					randomUser.getProfileImage(), randomUser.isOnline()));
 			return;
 		}
 
@@ -61,7 +62,8 @@ public class JoinRoomService {
 		);
 
 		client.joinRoom(room.getId().toString());
-		client.sendEvent(SocketProperty.ROOM_KEY, new JoinResponse(randomUser.getName(), room.getId(), randomUser.getProfileImage()));
+		client.sendEvent(SocketProperty.ROOM_KEY, new JoinResponse(randomUser.getName(), room.getId(),
+				randomUser.getProfileImage(), randomUser.isOnline()));
 	}
 
 }
