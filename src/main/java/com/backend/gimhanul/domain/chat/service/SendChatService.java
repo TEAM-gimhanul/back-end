@@ -33,6 +33,7 @@ import org.springframework.stereotype.Service;
 public class SendChatService {
 
 	private final MessageRepository messageRepository;
+	private final GetRandomEmojiService getRandomEmojiService;
 	private final UserFacade userFacade;
 	private final RoomFacade roomFacade;
 	private final MemberFacade memberFacade;
@@ -61,7 +62,7 @@ public class SendChatService {
 			if(response.get(i).equals(Boolean.TRUE)){
 				StringBuilder builder = new StringBuilder();
 				for(int j = 0; j < messageList.get(i).length(); j++)
-					builder.append("X");
+					builder.append(getRandomEmojiService.getRandomEmoji());
 				messageList.set(i, builder.toString());
 			}
 		}
