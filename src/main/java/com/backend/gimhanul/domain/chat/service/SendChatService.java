@@ -1,5 +1,9 @@
 package com.backend.gimhanul.domain.chat.service;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import com.backend.gimhanul.domain.chat.domain.Member;
@@ -16,6 +20,9 @@ import com.backend.gimhanul.domain.user.domain.User;
 import com.backend.gimhanul.domain.chat.domain.facade.RoomFacade;
 import com.backend.gimhanul.domain.user.facade.UserFacade;
 import com.backend.gimhanul.global.socket.SocketProperty;
+import com.backend.gimhanul.global.utils.api.client.FilterClient;
+import com.backend.gimhanul.global.utils.api.dto.request.FilterRequest;
+import com.backend.gimhanul.global.utils.api.dto.response.FilterResponse;
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +37,7 @@ public class SendChatService {
 	private final UserFacade userFacade;
 	private final RoomFacade roomFacade;
 	private final MemberFacade memberFacade;
+	private final FilterClient filterClient;
 
 	@Transactional
 	public void execute(SocketIOClient client, SocketIOServer server, SendChatRequest request) {
@@ -43,7 +51,21 @@ public class SendChatService {
 		User user = userFacade.findUserByClient(client);
 		Member member = memberFacade.findMemberByUserAndRoom(user, room);
 
-		// TODO: 2021-11-25 비속어 감지
+		List<String> messageList = Arrays.asList(request.getMessage().split(" "));
+		List<Boolean> response = filterClient.filtering(new FilterRequest(messageList)).getData();
+
+		int count = Collections.frequency(response, true);
+		user.appendCount(count);
+
+
+		for(int i = 0; i < messageList.size(); i++) {
+			if(response.get(i).equals(Boolean.TRUE)){
+				StringBuilder builder = new StringBuilder();
+				for(int j = 0; j < messageList.get(i).length(); j++)
+					builder.append("X");
+				messageList.set(i, builder.toString());
+			}
+		}
 
 		Message message = messageRepository.save(
 				Message.builder()
