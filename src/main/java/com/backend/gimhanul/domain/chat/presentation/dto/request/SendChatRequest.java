@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class SendChatRequest {
 
-	private Long roomId;
+	private String roomId;
 	private String message;
 
 }

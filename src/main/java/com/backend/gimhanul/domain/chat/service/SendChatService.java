@@ -7,6 +7,7 @@ import com.backend.gimhanul.domain.chat.domain.facade.MemberFacade;
 import com.backend.gimhanul.domain.chat.domain.repository.MemberRepository;
 import com.backend.gimhanul.domain.chat.domain.repository.MessageRepository;
 import com.backend.gimhanul.domain.chat.domain.repository.RoomRepository;
+import com.backend.gimhanul.domain.chat.exception.InvalidArgumentException;
 import com.backend.gimhanul.domain.chat.presentation.dto.request.SendChatRequest;
 import com.backend.gimhanul.domain.user.domain.User;
 import com.backend.gimhanul.domain.chat.domain.facade.RoomFacade;
@@ -28,7 +29,13 @@ public class SendChatService {
 	private final MemberFacade memberFacade;
 
 	public void execute(SocketIOClient client, SocketIOServer server, SendChatRequest request) {
-		Room room = roomFacade.findRoomById(request.getRoomId());
+		Room room;
+		try {
+			room = roomFacade.findRoomById(Long.valueOf(request.getRoomId()));
+		} catch (Exception e) {
+			throw InvalidArgumentException.EXCEPTION;
+		}
+
 		User user = userFacade.findUserByClient(client);
 		Member member = memberFacade.findMemberByUserAndRoom(user, room);
 
@@ -44,6 +51,8 @@ public class SendChatService {
 
 		server.getRoomOperations(room.getId().toString())
 				.sendEvent(SocketProperty.MESSAGE_KEY, message);
+
+		client.sendEvent(SocketProperty.MESSAGE_KEY, message);
 
 	}
 
