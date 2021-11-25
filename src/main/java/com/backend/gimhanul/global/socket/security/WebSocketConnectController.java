@@ -13,7 +13,7 @@ public class WebSocketConnectController {
 	private final JwtTokenProvider jwtTokenProvider;
 
 	public void onConnect(SocketIOClient client) {
-		String token = client.getHandshakeData().getSingleUrlParam("Authorization");
+		String token = client.getHandshakeData().getSingleUrlParam("authorization");
 		client.set(AuthenticationProperty.USER_KEY, jwtTokenProvider.validate(token).getId());
 	}
 	
