@@ -13,7 +13,7 @@ public class GetRandomEmojiService {
 
     private final EmojiFacade emojiFacade;
 
-    private static final int DATA_MAX_ID = 100;
+    private static final int DATA_MAX_ID = 130;
 
     public Emoji getRandomEmoji () {
         return emojiFacade.findEmojiById(

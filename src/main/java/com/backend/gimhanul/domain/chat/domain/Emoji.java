@@ -17,6 +17,6 @@ public class Emoji {
     private Long id;
 
     @Column
-    private String message;
+    private String emoticon;
 }
 
