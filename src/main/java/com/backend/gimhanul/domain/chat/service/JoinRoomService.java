@@ -2,6 +2,8 @@ package com.backend.gimhanul.domain.chat.service;
 
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import com.backend.gimhanul.domain.chat.domain.Member;
 import com.backend.gimhanul.domain.chat.domain.Room;
 import com.backend.gimhanul.domain.chat.domain.repository.MemberRepository;
@@ -25,6 +27,7 @@ public class JoinRoomService {
 	private final UserRepository userRepository;
 	private final UserFacade userFacade;
 
+	@Transactional
 	public void execute(SocketIOClient client) {
 		User currentUser = userFacade.findUserByClient(client);
 		User randomUser = userRepository.getUserRamdom(currentUser.getId());
