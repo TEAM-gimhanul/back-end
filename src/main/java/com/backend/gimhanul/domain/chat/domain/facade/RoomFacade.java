@@ -17,4 +17,5 @@ public class RoomFacade {
     public Room findRoomById(Long id) {
         return roomRepository.findById(id)
                 .orElseThrow(() -> RoomNotFoundException.EXCEPTION);
+    }
 }
