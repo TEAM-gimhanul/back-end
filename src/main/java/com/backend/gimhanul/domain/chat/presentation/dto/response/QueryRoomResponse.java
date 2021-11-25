@@ -14,5 +14,6 @@ public class QueryRoomResponse {
 	private final String profileImage;
 	private final String lastMessage;
 	private final LocalDateTime sentAt;
+	private final boolean isOnline;
 
 }

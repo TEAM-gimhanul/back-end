@@ -26,7 +26,7 @@ public class QueryRoomService {
 							.orElse(null);
 					return new QueryRoomResponse(room.getId(), room.getUsername(user.getId()),
 							room.getProfileImage(user.getId()), message != null ? message.getMessage() : null,
-							message != null ? message.getSentAt() : null);
+							message != null ? message.getSentAt() : null, room.getOnline(user.getId()));
 				}).collect(Collectors.toList());
 	}
 
