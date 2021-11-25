@@ -4,8 +4,10 @@ import java.util.List;
 
 import com.backend.gimhanul.domain.chat.exception.InvalidArgumentException;
 import com.backend.gimhanul.domain.chat.presentation.dto.request.SendChatRequest;
+import com.backend.gimhanul.domain.chat.presentation.dto.response.QueryMessageResponse;
 import com.backend.gimhanul.domain.chat.presentation.dto.response.QueryRoomResponse;
 import com.backend.gimhanul.domain.chat.service.JoinRoomService;
+import com.backend.gimhanul.domain.chat.service.QueryMessageService;
 import com.backend.gimhanul.domain.chat.service.QueryRoomService;
 import com.backend.gimhanul.domain.chat.service.SendChatService;
 import com.backend.gimhanul.domain.chat.service.SubscribeAllService;
@@ -19,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @SocketController
 @RequiredArgsConstructor
@@ -28,6 +31,7 @@ public class ChatController {
 	private final SubscribeAllService subscribeAllService;
 	private final JoinRoomService joinRoomService;
 	private final QueryRoomService queryRoomService;
+	private final QueryMessageService queryMessageService;
 
 
 	@SocketMapping(endpoint = "message", requestCls = SendChatRequest.class)
@@ -59,6 +63,12 @@ public class ChatController {
 	@GetMapping("/rooms")
 	public List<QueryRoomResponse> queryRoom(@RequestAttribute("user") User user) {
 		return queryRoomService.execute(user);
+	}
+
+	@UserLoginToken
+	@GetMapping("/content")
+	public List<QueryMessageResponse> queryMessage(@RequestAttribute("user") User user, @RequestParam("room_id") String roomId) {
+		return queryMessageService.execute(user, roomId);
 	}
 
 }
