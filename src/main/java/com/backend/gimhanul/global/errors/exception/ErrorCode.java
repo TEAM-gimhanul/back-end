@@ -23,9 +23,10 @@ public enum ErrorCode {
 
 	INVALID_ARGUMENT(400, "CHAT-400-1", "Invalid argument"),
 	ROOM_NOT_FOUND(404, "CHAT-404-1", "Room not found"),
-	MEMBER_NOT_FOUND(404, "CHAT-404-2", "Member not found"),
+	MEMBER_NOT_FOUND(404, "CHAT-404-1", "Member not found."),
+	SWEAR_NOT_FOUND(404, "CHAT-404-2", "Chat not found."),
 
-	OTHER_SERVER_BAD_REQUEST(400, "FEIGN-400-1", "Other server bad reqeust"),
+	OTHER_SERVER_BAD_REQUEST(400, "FEIGN-400-1", "Other server bad request"),
 	OTHER_SERVER_UNAUTHORIZED(401, "FEIGN-401-1", "Other server unauthorized"),
 	OTHER_SERVER_FORBIDDEN(403, "FEIGN-403-1", "Other server forbidden"),
 	OTHER_SERVER_EXPIRED_TOKEN(419, "FEIGN-419-1", "Other server expired token"),
