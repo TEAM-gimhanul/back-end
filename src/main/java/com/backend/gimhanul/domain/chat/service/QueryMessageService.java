@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.backend.gimhanul.domain.chat.domain.Room;
-import com.backend.gimhanul.domain.chat.domain.facade.RoomFacade;
+import com.backend.gimhanul.domain.chat.facade.RoomFacade;
 import com.backend.gimhanul.domain.chat.domain.repository.MessageRepository;
 import com.backend.gimhanul.domain.chat.presentation.dto.response.QueryMessageResponse;
 import com.backend.gimhanul.domain.user.domain.User;

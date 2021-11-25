@@ -1,4 +1,4 @@
-package com.backend.gimhanul.domain.chat.domain.facade;
+package com.backend.gimhanul.domain.chat.facade;
 
 import com.backend.gimhanul.domain.user.domain.User;
 import com.backend.gimhanul.domain.chat.domain.Member;
