@@ -6,6 +6,7 @@ import com.backend.gimhanul.domain.chat.domain.Room;
 import com.backend.gimhanul.domain.chat.domain.Swear;
 import com.backend.gimhanul.domain.chat.domain.repository.MessageRepository;
 import com.backend.gimhanul.domain.chat.domain.repository.SwearRepository;
+import com.backend.gimhanul.domain.chat.exception.SwearNotFoundException;
 import com.backend.gimhanul.domain.chat.exception.InvalidArgumentException;
 import com.backend.gimhanul.domain.chat.facade.MemberFacade;
 import com.backend.gimhanul.domain.chat.facade.RoomFacade;
@@ -105,12 +106,18 @@ public class SendChatService {
                 .build();
     }
 
-    private void addMessage(List<String> result, String message, User user) {
-        if (swearRepository.findById(message).get().isSwear()) {
-            result.add(changeSwear(message));
-            user.increaseCount();
-        } else result.add(message);
-    }
+	private void addMessage(List<String> result, String message, User user) {
+		Swear swear = swearRepository.findById(message)
+				.orElseThrow(() -> SwearNotFoundException.EXCEPTION);
+		if (swear.isSwear()) {
+			swear.increaseCount();
+			if(swear.getReplaceMessage() != null)
+				result.add(swear.getReplaceMessage());
+			else result.add(changeSwear(message));
+			user.increaseCount();
+		}
+		else result.add(message);
+	}
 
     private String changeSwear(String swear) {
         StringBuilder builder = new StringBuilder();
