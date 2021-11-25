@@ -62,7 +62,7 @@ public class SendChatService {
 			if(response.get(i).equals(Boolean.TRUE)){
 				StringBuilder builder = new StringBuilder();
 				for(int j = 0; j < messageList.get(i).length(); j++)
-					builder.append(getRandomEmojiService.getRandomEmoji());
+					builder.append(getRandomEmojiService.getRandomEmoji().getEmoticon());
 				messageList.set(i, builder.toString());
 			}
 		}
