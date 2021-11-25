@@ -35,8 +35,8 @@ public class User {
         this.profileImage = profileImage;
     }
 
-    public void appendCount(int count) {
-    	this.count += count;
+    public void increaseCount() {
+    	this.count ++;
 	}
 
 }
