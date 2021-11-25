@@ -3,6 +3,7 @@ package com.backend.gimhanul.domain.chat.service;
 import com.backend.gimhanul.domain.chat.domain.repository.RoomRepository;
 import com.backend.gimhanul.domain.user.domain.User;
 import com.backend.gimhanul.domain.user.facade.UserFacade;
+import com.backend.gimhanul.global.socket.SocketProperty;
 import com.corundumstudio.socketio.SocketIOClient;
 import lombok.RequiredArgsConstructor;
 
@@ -20,6 +21,8 @@ public class SubscribeAllService {
 
 		roomRepository.findIdEmail(user.getId())
 				.forEach(client::joinRoom);
+
+		client.sendEvent(SocketProperty.SUBSCRIBE_KEY, "Subscribe all success");
 	}
 
 }
