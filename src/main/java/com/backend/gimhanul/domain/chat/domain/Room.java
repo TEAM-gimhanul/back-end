@@ -1,5 +1,9 @@
 package com.backend.gimhanul.domain.chat.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,4 +28,13 @@ public class Room {
     public Room(String name) {
         this.name = name;
     }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "room")
+	private Set<Member> members = new HashSet<>();
+
+    public String getUsername(String id) {
+    	return members.stream().filter(member -> !member.getUser().getId().equals(id))
+				.collect(Collectors.toList()).get(0).getUser().getName();
+	}
+
 }
