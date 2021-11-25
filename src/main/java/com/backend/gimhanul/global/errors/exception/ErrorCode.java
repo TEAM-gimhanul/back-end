@@ -19,6 +19,7 @@ public enum ErrorCode {
 	TOKEN_FORGED_ERROR(403, "TOKEN-403-1", "Token is forged"),
 	TOKEN_IS_EXPIRE(410, "TOKEN-410-1", "Token is expire"),
 
+	INVALID_ARGUMENT(400, "CHAT-400-1", "Invalid argument"),
 	ROOM_NOT_FOUND(404, "CHAT-404-1", "Room not found"),
 	MEMBER_NOT_FOUND(404, "CHAT-404-2", "Member not found"),
 
