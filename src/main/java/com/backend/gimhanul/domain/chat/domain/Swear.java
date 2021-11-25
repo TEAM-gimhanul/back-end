@@ -29,4 +29,8 @@ public class Swear {
 		this.replaceMessage = replaceMessage;
 	}
 
+	public void increaseCount() {
+		this.count ++;
+	}
+
 }
