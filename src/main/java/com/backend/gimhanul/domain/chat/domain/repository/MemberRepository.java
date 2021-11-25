@@ -15,5 +15,5 @@ public interface MemberRepository extends CrudRepository<Member, Long> {
 	Optional<Member> findByUserAndRoom(User user, Room room);
 
 	@Query("select distinct(m.room.id) from tbl_member m where m.user.id = :currentUser or m.user.id = :userId group by m.room.id having count(m.id) > 1")
-	Optional<String> findRoomIdByUsers(String currentUser, String userId);
+	Optional<Long> findRoomIdByUsers(String currentUser, String userId);
 }
