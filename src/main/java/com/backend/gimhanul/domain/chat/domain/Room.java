@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.backend.gimhanul.domain.user.domain.User;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -33,13 +34,20 @@ public class Room {
 	private Set<Member> members = new HashSet<>();
 
     public String getUsername(String id) {
-    	return members.stream().filter(member -> !member.getUser().getId().equals(id))
-				.collect(Collectors.toList()).get(0).getUser().getName();
+    	return queryUser(id).getName();
 	}
 
 	public String getProfileImage(String id) {
+		return queryUser(id).getProfileImage();
+	}
+
+	public boolean getOnline(String id) {
+		return queryUser(id).isOnline();
+	}
+
+	private User queryUser(String id) {
 		return members.stream().filter(member -> !member.getUser().getId().equals(id))
-				.collect(Collectors.toList()).get(0).getUser().getProfileImage();
+				.collect(Collectors.toList()).get(0).getUser();
 	}
 
 }
