@@ -10,9 +10,11 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@EntityListeners(AuditingEntityListener.class)
 @Entity(name = "tbl_message")
 public class Message {
 
