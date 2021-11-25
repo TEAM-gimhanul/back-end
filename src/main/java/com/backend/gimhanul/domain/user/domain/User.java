@@ -27,6 +27,8 @@ public class User {
     @Column
     private long count;
 
+    private boolean isOnline;
+
     @Builder
     public User(String id, String name, long count, String profileImage) {
     	this.id = id;
@@ -37,6 +39,14 @@ public class User {
 
     public void increaseCount() {
     	this.count ++;
+	}
+
+	public void setOnlineTrue() {
+    	this.isOnline = true;
+	}
+
+	public void setOnlineFalse() {
+    	this.isOnline = false;
 	}
 
 }

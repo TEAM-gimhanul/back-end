@@ -4,6 +4,7 @@ import com.backend.gimhanul.global.config.properties.SocketProperties;
 import com.backend.gimhanul.global.socket.WebSocketAddMappingSupporter;
 import com.backend.gimhanul.global.socket.exception.SocketExceptionListener;
 import com.backend.gimhanul.global.socket.security.WebSocketConnectController;
+import com.backend.gimhanul.global.socket.security.WebSocketDisConnectController;
 import com.corundumstudio.socketio.Configuration;
 import com.corundumstudio.socketio.SocketIOServer;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ public class SocketConfig {
 
 	private final WebSocketAddMappingSupporter mappingSupporter;
 	private final WebSocketConnectController connectController;
+	private final WebSocketDisConnectController disConnectController;
 	private final SocketExceptionListener exceptionListener;
 	private final SocketProperties socketProperties;
 
@@ -30,6 +32,7 @@ public class SocketConfig {
 		SocketIOServer server = new SocketIOServer(config);
 		mappingSupporter.addListeners(server);
 		server.addConnectListener(connectController::onConnect);
+		server.addDisconnectListener(disConnectController::onDisConnect);
 		return server;
 	}
 
