@@ -26,6 +26,7 @@ import com.backend.gimhanul.global.utils.api.dto.response.FilterResponse;
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
 import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.util.buf.StringUtils;
 
 import org.springframework.stereotype.Service;
 
@@ -67,15 +68,17 @@ public class SendChatService {
 			}
 		}
 
-		Message message = messageRepository.save(
+		String content = StringUtils.join(messageList, ' ');
+
+		messageRepository.save(
 				Message.builder()
 				.room(room)
-				.message(request.getMessage())
+				.message(content)
 				.member(member)
 				.build()
 		);
 
-		MessageDto messageDto = new MessageDto(message.getMessage(), room.getUsername(user.getId()),
+		MessageDto messageDto = new MessageDto(content, room.getUsername(user.getId()),
 				room.getProfileImage(user.getId()), room.getId());
 
 		client.sendEvent(SocketProperty.MESSAGE_KEY, messageDto);
