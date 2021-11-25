@@ -10,5 +10,6 @@ public class JoinResponse {
 	private final String name;
 	private final Long roomId;
 	private final String profileImage;
+	private final boolean isOnline;
 
 }
