@@ -9,15 +9,13 @@ import javax.transaction.Transactional;
 import com.backend.gimhanul.domain.chat.domain.Member;
 import com.backend.gimhanul.domain.chat.domain.Message;
 import com.backend.gimhanul.domain.chat.domain.Room;
-import com.backend.gimhanul.domain.chat.domain.facade.MemberFacade;
-import com.backend.gimhanul.domain.chat.domain.repository.MemberRepository;
+import com.backend.gimhanul.domain.chat.facade.MemberFacade;
 import com.backend.gimhanul.domain.chat.domain.repository.MessageRepository;
-import com.backend.gimhanul.domain.chat.domain.repository.RoomRepository;
 import com.backend.gimhanul.domain.chat.exception.InvalidArgumentException;
 import com.backend.gimhanul.domain.chat.presentation.dto.request.SendChatRequest;
 import com.backend.gimhanul.domain.chat.presentation.dto.response.MessageDto;
 import com.backend.gimhanul.domain.user.domain.User;
-import com.backend.gimhanul.domain.chat.domain.facade.RoomFacade;
+import com.backend.gimhanul.domain.chat.facade.RoomFacade;
 import com.backend.gimhanul.domain.user.facade.UserFacade;
 import com.backend.gimhanul.global.socket.SocketProperty;
 import com.backend.gimhanul.global.utils.api.client.FilterClient;
@@ -35,6 +33,7 @@ import org.springframework.stereotype.Service;
 public class SendChatService {
 
 	private final MessageRepository messageRepository;
+	private final GetRandomEmojiService getRandomEmojiService;
 	private final UserFacade userFacade;
 	private final RoomFacade roomFacade;
 	private final MemberFacade memberFacade;
@@ -63,7 +62,7 @@ public class SendChatService {
 			if(response.get(i).equals(Boolean.TRUE)){
 				StringBuilder builder = new StringBuilder();
 				for(int j = 0; j < messageList.get(i).length(); j++)
-					builder.append("X");
+					builder.append(getRandomEmojiService.getRandomEmoji());
 				messageList.set(i, builder.toString());
 			}
 		}
