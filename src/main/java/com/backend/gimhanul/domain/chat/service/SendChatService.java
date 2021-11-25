@@ -81,12 +81,8 @@ public class SendChatService {
 		MessageDto messageDto = new MessageDto(content, room.getUsername(user.getId()),
 				room.getProfileImage(user.getId()), room.getId());
 
-		client.sendEvent(SocketProperty.MESSAGE_KEY, messageDto);
-
 		server.getRoomOperations(room.getId().toString())
 				.sendEvent(SocketProperty.MESSAGE_KEY, messageDto);
-
-
 
 	}
 
