@@ -1,5 +1,7 @@
 package com.backend.gimhanul.domain.chat.service;
 
+import javax.transaction.Transactional;
+
 import com.backend.gimhanul.domain.chat.domain.Member;
 import com.backend.gimhanul.domain.chat.domain.Message;
 import com.backend.gimhanul.domain.chat.domain.Room;
@@ -9,6 +11,7 @@ import com.backend.gimhanul.domain.chat.domain.repository.MessageRepository;
 import com.backend.gimhanul.domain.chat.domain.repository.RoomRepository;
 import com.backend.gimhanul.domain.chat.exception.InvalidArgumentException;
 import com.backend.gimhanul.domain.chat.presentation.dto.request.SendChatRequest;
+import com.backend.gimhanul.domain.chat.presentation.dto.response.MessageDto;
 import com.backend.gimhanul.domain.user.domain.User;
 import com.backend.gimhanul.domain.chat.domain.facade.RoomFacade;
 import com.backend.gimhanul.domain.user.facade.UserFacade;
@@ -28,6 +31,7 @@ public class SendChatService {
 	private final RoomFacade roomFacade;
 	private final MemberFacade memberFacade;
 
+	@Transactional
 	public void execute(SocketIOClient client, SocketIOServer server, SendChatRequest request) {
 		Room room;
 		try {
@@ -49,10 +53,15 @@ public class SendChatService {
 				.build()
 		);
 
-		server.getRoomOperations(room.getId().toString())
-				.sendEvent(SocketProperty.MESSAGE_KEY, message);
+		MessageDto messageDto = new MessageDto(message.getMessage(), room.getUsername(user.getId()),
+				room.getProfileImage(user.getId()), room.getId());
 
-		client.sendEvent(SocketProperty.MESSAGE_KEY, message);
+		client.sendEvent(SocketProperty.MESSAGE_KEY, messageDto);
+
+		server.getRoomOperations(room.getId().toString())
+				.sendEvent(SocketProperty.MESSAGE_KEY, messageDto);
+
+
 
 	}
 
