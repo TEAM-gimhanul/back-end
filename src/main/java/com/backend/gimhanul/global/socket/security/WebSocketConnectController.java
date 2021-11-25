@@ -1,5 +1,6 @@
 package com.backend.gimhanul.global.socket.security;
 
+import com.backend.gimhanul.global.security.jwt.JwtTokenProvider;
 import com.corundumstudio.socketio.SocketIOClient;
 import lombok.RequiredArgsConstructor;
 
@@ -9,8 +10,11 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class WebSocketConnectController {
 
+	private final JwtTokenProvider jwtTokenProvider;
+
 	public void onConnect(SocketIOClient client) {
-//			TODO: 2021-11-24 client에 USER_KEY로 유저 고유값 넣기
+		String token = client.getHandshakeData().getSingleUrlParam("Authorization");
+		client.set(AuthenticationProperty.USER_KEY, jwtTokenProvider.validate(token).getId());
 	}
 	
 }
