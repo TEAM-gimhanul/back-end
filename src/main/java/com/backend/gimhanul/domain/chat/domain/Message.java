@@ -1,11 +1,15 @@
 package com.backend.gimhanul.domain.chat.domain;
 
+import java.time.LocalDateTime;
+
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+
+import org.springframework.data.annotation.CreatedDate;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -27,6 +31,9 @@ public class Message {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_room_id")
     private Room room;
+
+    @CreatedDate
+	private LocalDateTime sentAt;
 
     @Builder
     public Message (String message, Member member, Room room) {
